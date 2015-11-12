@@ -91,4 +91,7 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+	public function actionAdd_user_form(){		
+		return $this->renderPartial('add_user_form');
+	}
 }

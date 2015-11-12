@@ -19,6 +19,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+	<script src="<?= Yii::$app->request->getBaseUrl() ?>/js/jquery-2.1.4.min.js"></script>
     <?php $this->head() ?>
 </head>
 <body>
@@ -61,9 +62,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        
     </div>
 </footer>
 
