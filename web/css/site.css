@@ -108,6 +108,8 @@ a.desc:after {
 .right-box{
 	float: left;
 	padding-left: 5px;
+	padding-top: 5px;
+	width: 50%;	 
 }
 .navbar-inverse{
 	background-color: #01579B;
@@ -122,4 +124,48 @@ a.desc:after {
 }
 .navbar-inverse .navbar-nav > li > a {
     color: #B3E5FC;
+}
+.table-add  td{
+	padding-bottom: 2px;
+	width: 100px
+}
+.button {		
+	max-width: 100px;
+	text-align: center;
+	border: 1px solid #607D8B;
+	-webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.button:hover {
+	cursor: pointer;
+	background: #B2EBF2
+}
+.form{
+	border: 1px solid #0277BD;
+	border-left: 0px;
+	border-bottom: 0px;
+	border-top: 0px;
+	height: 99vh;
+}
+.result-box{
+	float: left;
+    width: 35%;	
+    padding-left: 5px;
+	padding-top: 5px;
+}
+.head-box{
+	background: #757575;
+	color: #fff;
+	margin-bottom: 5px;
+	margin-right: 5px;
+}
+.breadcrumbs-line {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.breadcrumb{
+	margin-bottom: 0px;
 }

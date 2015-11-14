@@ -74,18 +74,6 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
 
     public function actionAbout()
     {
@@ -93,5 +81,30 @@ class SiteController extends Controller
     }
 	public function actionAdd_user_form(){		
 		return $this->renderPartial('add_user_form');
+	}
+	public function actionGet_users(){			
+		$allUsers = Yii::$app->db->createCommand('SELECT cu.lastname, cu.firstname, cu.login, cr.title role FROM crm_users cu
+		LEFT JOIN crm_roles cr ON cu.role = cr.id
+		')
+            ->queryAll();	
+			
+		return $this->renderPartial('get_users',[
+			'users' => $allUsers
+		]);
+	}
+	public function actionAdd_users(){
+		$post = $_POST;
+		$data = [];
+		foreach($post['arrayOfData'] as $val){
+			$data[$val['0']] = $val['1'];
+		}
+		
+		$query = Yii::$app->db->createCommand()->insert('crm_users',[
+			'lastname' => $data['lastname'],
+			'firstname' => $data['firstname'],
+			'login' => $data['login'],
+			'password' => $data['password'],
+			'role' => $data['role']
+		])->execute();
 	}
 }

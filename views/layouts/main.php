@@ -38,8 +38,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'About', 'url' => ['/site/about']],            
             Yii::$app->user->isGuest ?
                 ['label' => 'Login', 'url' => ['/site/login']] :
                 [
@@ -52,20 +51,20 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
+    <div class="container">        
+        <?= $content ?>		
+    </div>
+	<div class="breadcrumbs-line">
+		<?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= $content ?>
-    </div>
-</div>
-
-<footer class="footer">
+		<footer class="footer">
     <div class="container">
         
     </div>
 </footer>
-
+	</div>
+</div>
 <?php $this->endBody() ?>
 </body>
 </html>
