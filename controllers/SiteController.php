@@ -83,13 +83,17 @@ class SiteController extends Controller
 		return $this->renderPartial('add_user_form');
 	}
 	public function actionGet_users(){			
-		$allUsers = Yii::$app->db->createCommand('SELECT cu.lastname, cu.firstname, cu.login, cr.title role FROM crm_users cu
-		LEFT JOIN crm_roles cr ON cu.role = cr.id
+		$allUsers = Yii::$app->db->createCommand('SELECT cu.id, cu.lastname, cu.firstname, cu.login, cr.title role, cu.user_card FROM crm_users cu
+		LEFT JOIN crm_roles cr ON cu.role = cr.id		
+		ORDER BY cu.id DESC limit 10
 		')
-            ->queryAll();	
-			
+            ->queryAll();
+		$count = Yii::$app->db->createCommand('SELECT count(id) amount FROM crm_users')->queryAll();
+		
+		//var_dump($allUsers); exit;
 		return $this->renderPartial('get_users',[
-			'users' => $allUsers
+			'users' => $allUsers,
+			'amount' => $count['0']['amount']
 		]);
 	}
 	public function actionAdd_users(){
@@ -106,5 +110,24 @@ class SiteController extends Controller
 			'password' => $data['password'],
 			'role' => $data['role']
 		])->execute();
+	}
+	public function actionGet_user_card(){
+		$post = $_POST;
+		if($post['id']){
+			$id = $post['id'];
+			$user_id = $post['user_id'];
+			$query = Yii::$app->db->createCommand("
+			SELECT * FROM crm_user_card WHERE id = $id
+			")->queryAll();
+			$user_info = Yii::$app->db->createCommand("
+			SELECT lastname, firstname, role FROM crm_users WHERE id = $user_id
+			")->queryAll();
+			return $this->renderPartial('get_user_card',[
+				'user_card' => $query['0'],
+				'user_info' => $user_info['0']
+			]);
+		}else{
+			return $this->renderPartial('add_user_card');
+		}
 	}
 }

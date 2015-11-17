@@ -22,7 +22,7 @@ $(document).ready(function(){
 			type: "POST",
 			url: "<?= Yii::$app->homeUrl ?>?r=site/add_user_form",
 			success: function(data){
-				$('.right-box').html(data);
+				$('.right-box').html(data);				
 				$.ajax({
 					type: "POST",
 					url: "<?= Yii::$app->homeUrl ?>?r=site/get_users",					
@@ -61,6 +61,20 @@ $(document).ready(function(){
 			}
 		});
 				
+	});
+	$('body').on("click", ".user_card", function(){
+		$.ajax({
+			type: "POST",
+			url: "<?= Yii::$app->homeUrl ?>?r=site/get_user_card",
+			data: {
+				id: $(this).attr('id'),
+				user_id: $(this).data('id')
+			},
+			success: function(data){
+				console.log(data);
+				$('.right-box').html(data);
+			}
+		});
 	});
 });
 
